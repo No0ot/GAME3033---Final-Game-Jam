@@ -40,11 +40,11 @@ public class PlayerController : MonoBehaviour
         {
             canDoubleJump = true;
             animator.SetBool("IsGrounded", true);
-            Rotate();
         }
         else
             animator.SetBool("IsGrounded", false);
         Move();
+            Rotate();
     }
 
     private void Move()
@@ -52,20 +52,12 @@ public class PlayerController : MonoBehaviour
         Vector2 moveDirection = new Vector2(inputVector.x, 0.0f);
         moveDirection.Normalize();
 
-        if (isGrounded)
-        {
-            if (rigidbody.velocity.magnitude < maxSpeed)
-                rigidbody.AddForce(moveDirection * (runForce * rigidbody.mass));
-        }
-        else
-        {
-            if (rigidbody.velocity.magnitude < maxSpeed)
-                rigidbody.AddForce(moveDirection * (runForce * rigidbody.mass) / 2);
-        }
-
+   
+        if (rigidbody.velocity.magnitude < maxSpeed)
+            rigidbody.AddForce(moveDirection * (runForce * rigidbody.mass));
 
         animator.SetFloat("Speed", rigidbody.velocity.magnitude / maxSpeed);
-
+        rigidbody.velocity *= 0.99f;
     }
 
     void OnJump(InputValue value)
@@ -107,7 +99,7 @@ public class PlayerController : MonoBehaviour
             moveDirection.Normalize();
 
             if (rigidbody.velocity.magnitude < maxSpeed)
-                rigidbody.AddForce(moveDirection * (jumpForce * rigidbody.mass));
+                rigidbody.AddForce(moveDirection * (jumpForce * rigidbody.mass), ForceMode.Impulse);
             //Debug.Log("STUFFF");
         }
 
@@ -136,5 +128,10 @@ public class PlayerController : MonoBehaviour
             Quaternion toRotation = Quaternion.LookRotation(Vector3.left, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 720.0f * Time.deltaTime);
         }
+    }
+
+    public void NewLevelStart()
+    {
+        rigidbody.velocity = Vector3.zero;
     }
 }

@@ -16,6 +16,7 @@ public class SpikeTrap : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             other.transform.position = levelRef.levelRestart.position;
+            other.GetComponent<PlayerController>().NewLevelStart();
         }    
     }
 }

@@ -74,6 +74,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnPause(InputValue value)
+    {
+        GameManager.instance.PauseGame();
+    }
+
     void Jump()
     {
         isGrounded = false;

@@ -7,7 +7,7 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     public TMP_Text timerText;
-
+    public TMP_Text levelText;
 
     private void Update()
     {
@@ -16,5 +16,7 @@ public class UIManager : MonoBehaviour
         float color = sec / 10;
         timerText.text = sec.ToString();
         timerText.color = new Color(1.0f, color, color);
+
+        levelText.text = "Level: " + (GameManager.instance.currentLevel + 1);
     }
 }

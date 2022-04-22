@@ -6,6 +6,7 @@ public class MainMenuScript : MonoBehaviour
 {
     public void PlayButtonPressed()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("GameScene");
     }
 

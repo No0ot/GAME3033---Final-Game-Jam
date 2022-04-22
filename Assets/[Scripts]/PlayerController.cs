@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
+        SoundManager.instance.PlaySound(0);
         isGrounded = false;
         rigidbody.AddForce(transform.up * (jumpForce * rigidbody.mass), ForceMode.Impulse);
 
@@ -95,6 +96,7 @@ public class PlayerController : MonoBehaviour
 
     void DoubleJump()
     {
+        SoundManager.instance.PlaySound(1);
         rigidbody.velocity = new Vector3(rigidbody.velocity.x, 0, rigidbody.velocity.z);
 
         if((inputVector.x > 0 && rigidbody.velocity.x < 0) || (inputVector.x < 0 && rigidbody.velocity.x > 0))

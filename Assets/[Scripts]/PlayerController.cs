@@ -32,10 +32,14 @@ public class PlayerController : MonoBehaviour
         inputVector = value.Get<Vector2>().normalized;
     }
 
+    private void Update()
+    {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
+        
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundRadius, groundMask);
         if (isGrounded)
         {
             canDoubleJump = true;
